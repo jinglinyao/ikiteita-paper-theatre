@@ -1,0 +1,20 @@
+piece facade_R 2.0500 2.9786
+win 0.7001 0.9760 0.5696 0.3145
+win 1.4033 0.9953 0.5459 0.2640
+win 1.4804 1.4967 0.7595 0.5607
+win 0.6972 1.6183 0.5637 0.3174
+win 0.7001 2.2636 0.5696 0.3204
+win 1.4804 2.1331 0.7654 0.5755
+piece facade_L 2.0500 2.7669
+piece far_row 5.6000 0.5731
+piece lamp_post 0.4095 3.0000
+piece sky 5.6000 2.5846
+sil sil_lamp 0.5405
+sil sil_clock 0.8998
+sil sil_book 1.4517
+sil sil_umbrella 0.8119
+sil sil_bike 1.6604
+sil sil_bag 0.7078
+sil sil_cat 0.8077
+sil sil_plant 0.8462
+sil sil_guitar 0.5357

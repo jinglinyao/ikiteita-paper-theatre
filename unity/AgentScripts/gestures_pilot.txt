@@ -1,0 +1,8 @@
+# microphone + multi-camera pilot, 100-124 s
+mic 96.0 4.4
+mic|chest_L 100.49 3.19
+mic|reach_L 103.78 3.4
+mic|reach_L~ 107.25 1.9
+mic2 109.2 2.65
+mic|raise_L+ 111.93 3.4
+mic 122.45 3.0

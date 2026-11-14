@@ -1,0 +1,238 @@
+<title>显像管的外侧 设计图纸</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<style>{{STYLE}}
+/* v2 additions */
+:root { --crowd: #63742A; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --crowd: #B3C56B; } }
+:root[data-theme="dark"] { --crowd: #B3C56B; }
+.sheetno { font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; color: var(--red); }
+.sechead { gap: 4px; }
+blockquote { margin: 0; padding: 4px 0 4px 16px; border-left: 3px solid var(--ink); display: flex; flex-direction: column; gap: 6px; max-width: 44em; }
+blockquote p { font-size: 15px; }
+blockquote cite { font-style: normal; color: var(--muted); font-size: 12.5px; }
+.pipe { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); border: 1px solid var(--ink); background: var(--sheet); }
+.pipe > div { padding: 14px 16px; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.pipe .k { font-family: var(--mono); font-size: 12px; color: var(--red); letter-spacing: 0.06em; }
+.pipe p { font-size: 13.5px; line-height: 1.65; }
+.pipe .out { color: var(--muted); font-size: 12.5px; font-family: var(--mono); }
+.tag.yT { border-color: var(--stage); color: var(--stage); } .tag.yL { border-color: var(--her); color: var(--her); } .tag.yA { border-color: var(--crowd); color: var(--crowd); }
+.tag.yR, .tag.yX { border-color: var(--tv); color: var(--tv); }
+table.shots { min-width: 1120px; }
+table.shots td:nth-child(7) { min-width: 190px; }
+.plant { fill: var(--stage); opacity: 0.45; } .shadow { fill: var(--ink); opacity: 0.22; } .screen { fill: var(--tv); opacity: 0.55; }
+.gloss { stroke: var(--lamp); stroke-width: 3; } .thick { stroke: var(--ink); stroke-width: 6; }
+.crowd { fill: var(--crowd); } .crowdf { fill: var(--crowd); opacity: 0.75; stroke: var(--ink); stroke-width: 1; } .card { fill: var(--sheet); stroke: var(--ink); stroke-width: 1; }
+.Bcrowd { fill: var(--crowd); fill-opacity: 0.40; }
+.VR { fill: var(--tv); fill-opacity: 0.30; } .VX { fill: var(--tv); fill-opacity: 0.50; } .VT { fill: var(--stage); fill-opacity: 0.30; } .VA { fill: var(--crowd); fill-opacity: 0.42; }
+.VL { fill: var(--her); fill-opacity: 0.50; } .VN { fill: var(--soft); }
+</style>
+
+<div class="page">
+
+<header>
+  <div class="eyebrow">あいみょん《生きていたんだよな》纸剧场音乐片　设计图纸 v3　2026-11-13</div>
+  <h1>显像管的外侧</h1>
+  <p class="lede">深夜，没人的房间里电视还开着。里面的纸舞台上，一群动物头的纸人围着<b>一张红纸</b>，红纸被人换掉；天亮时电视熄了，红纸折成的鸟停在电视顶上。</p>
+  <div class="spec"><span><b>193.1</b> 秒</span><span>每秒 <b>24</b> 帧，共 <b>{{NFRAMES}}</b> 帧</span><span><b>{{NSHOTS}}</b> 个镜头，平均 <b>{{AVG}}</b> 秒</span><span>纸剧场 <b>{{PT}}%</b>　房间 <b>{{PR}}%</b>　动物头纸人 <b>{{PA}}%</b>　lin <b>{{PL}}%</b></span></div>
+  <p>图纸按 The Edge 的九张来排，流程也照它的五段走。<b>v3 只重排了镜头</b>：你看了第一遍的 8 秒后说一镜四五秒太长、整体要快四分之一。镜头从 51 个加到 {{NSHOTS}} 个，平均从 3.8 秒降到 {{AVG}} 秒，最长的一镜从 6.5 秒降到 {{LONGEST}} 秒；叠化从两拍缩到一拍。歌不变速，画面不快进。布景、灯光、lin 的规格都没动。</p>
+</header>
+
+<section>
+  <div class="sechead"><span class="sheetno">图纸 01</span><h2>要求</h2></div>
+  <blockquote>
+    <p>我主要是想有真实光影渲染，真实场景互动，建模剧场，纸人偶表演。</p>
+    <p>纸剧场只能通过我们的程序实现；有些人物演唱的片段，将纸剧场和人物演唱结合，进行分层处理；单纯以纸生物为主体的镜头，做单独的设计。整体的空间、质感和节奏参考 The Edge。</p>
+    <p>围观的纸人，但纸人的头用各种凶神恶煞的动物。</p>
+    <p>lin 出现的时间继续压缩，不要让她做一些大幅度动作。</p>
+    <cite>你在 11 月 12–13 日说的四段话</cite>
+  </blockquote>
+  <p>这些话变成一个故事，就是上面那一句。下表是每条要求落在哪里。</p>
+  <div class="tw"><table>
+    <thead><tr><th>你的要求</th><th>落在哪里</th></tr></thead>
+    <tbody>
+      <tr><td>真实光影</td><td>房间四个光源、舞台七种灯，间接光事先烤好；夜是蓝的，不是黑的（图纸 03、08）</td></tr>
+      <tr><td>真实场景互动</td><td>lin 被纸灯照亮、在纸片上有影子；鸟落在她掌心（S54）；舞台的光照亮房间（S38、S62）；日出的光扫过电视和纸鸟（S69）</td></tr>
+      <tr><td>建模剧场</td><td>一座等大的纸舞台，台口 4 × 3 米，8 层纸片（图纸 04）</td></tr>
+      <tr><td>纸人偶表演</td><td>六个动物头纸人，12 个镜头，占 {{PA}}%；另有 3 个纸剧场镜头里也有它们</td></tr>
+      <tr><td>纸剧场为主</td><td>纸剧场镜头占 {{PT}}%</td></tr>
+      <tr><td>人物演唱和纸剧场结合</td><td>lin 搬进同一个场景、同一套灯光，站在纸幕布和纸窗之间</td></tr>
+      <tr><td>lin 压缩、不做大动作</td><td>{{NL}} 个镜头共 {{SL}} 秒，占 {{PL}}%；只拍胸上和腰上；每个镜头一个小姿势，手不过胸口</td></tr>
+      <tr><td>空间、质感、节奏参考 The Edge</td><td>量好尺寸的布景、同一个全景出现三次、镜头长度落在小节上、一个镜头一件事</td></tr>
+    </tbody></table></div>
+</section>
+
+<section>
+  <div class="sechead"><span class="sheetno">图纸 02</span><h2>流程</h2><p>五段，从左到右。先做镜头要对准的东西，所以舞台时间表排第一。</p></div>
+  <div class="pipe">
+    <div><span class="k">A　舞台时间表</span><p>一个文件写明每一刻舞台上发生什么：每个音节的时间、口型、lin 的姿势、每张纸片的动作、每件东西的名字和位置。只由影片秒数决定。</p><span class="out">→ film.json；电视画面 4,634 张</span></div>
+    <div><span class="k">B　脚本搭景</span><p>房间、电视、纸舞台、纸片、动物头纸人全部由脚本生成。纸片的图案来自生成的图片。lin 从母进程的工程只读复制过来。</p><span class="out">→ 场景文件两个</span></div>
+    <div><span class="k">C　逐帧烤死</span><p>相机、灯、纸片、lin 的姿势和头发、纸人，都写到每一帧上。任何一帧可以单独重渲。</p><span class="out">→ 逐帧动画缓存</span></div>
+    <div><span class="k">D　本机渲染</span><p>Unity 实时渲染加烤好的间接光。按镜头分文件夹，断了能续。</p><span class="out">→ 帧序列</span></div>
+    <div><span class="k">E　后期</span><p>光晕、暗角、颗粒；中日歌词字幕；音效按时间表放；响度 −14 LUFS。</p><span class="out">→ 母版和投稿版</span></div>
+  </div>
+  <ul class="plain">
+    <li><b>这条流水线跑两遍。</b>第一遍已经跑过一次（旧的两镜版）。按新的排法，同一段是 {{PILOTSHOTS}}（{{PILOT}}，{{PILOTLEN}} 秒）三个镜头：lin 的胸上、一扇窗亮起的特写、沿楼面上升。你同意后重跑这一段，再跑全片。</li>
+    <li><b>生成的素材在第二遍的 B 段才调用。</b>MiniMax 图片约 25–35 张：定调图 4、动物头和身体 12–15、布景纸片图案 8–10、天幕 3。</li>
+    <li><b>千问视频四次，共 30 秒，每次都有代码做的后备：</b>① 六个动物头一字排开的表演，10 秒，供 S15、S33 和 S56 用；② 红纸折成鸟，5 秒，供 S48 用；③ 纸街角搭起来，5 秒，供 S08 用；④ 舞台烟雾的黑底叠加层，10 秒，lin 的镜头都能叠。</li>
+  </ul>
+</section>
+
+<section>
+  <div class="sechead"><span class="sheetno">图纸 03</span><h2>布景：一间没有人的房间</h2><p>封闭的盒子，夜才真的暗。左墙一扇窗，是天光进来的唯一入口。房间里只有住过人的痕迹。</p></div>
+  <div class="cols">
+    <figure><div class="draw">{{ROOMPLAN}}</div><figcaption><b>平面</b>从上往下看，后墙在上。蓝色是电视的光，橙色是台灯，黄色是日出的光。</figcaption></figure>
+    <figure><div class="draw">{{ROOMELEV}}</div><figcaption><b>画面</b>全景机位正对的后墙。</figcaption></figure>
+  </div>
+  <div class="cols">
+    <div class="tw"><table>
+      <thead><tr><th>房间</th><th>尺寸</th></tr></thead>
+      <tbody>
+        <tr><td>地面</td><td class="num">3.64 × 2.73 m</td></tr>
+        <tr><td>层高</td><td class="num">2.40 m</td></tr>
+        <tr><td>窗</td><td class="num">1.65 × 1.15 m，窗台 0.85 m</td></tr>
+        <tr><td>窗帘</td><td>透光的薄帘，全程拉着</td></tr>
+      </tbody></table></div>
+    <div class="tw"><table>
+      <thead><tr><th>电视</th><th>尺寸</th></tr></thead>
+      <tbody>
+        <tr><td>机身</td><td class="num">52 × 53.4 × 45.5 cm</td></tr>
+        <tr><td>屏幕</td><td class="num">39.6 × 29.8 cm，20 英寸，4:3</td></tr>
+        <tr><td>屏幕贴图</td><td class="num">1440 × 1080 px</td></tr>
+        <tr><td>屏幕中心离地</td><td class="num">0.88 m</td></tr>
+      </tbody></table></div>
+    <div class="tw"><table>
+      <thead><tr><th>光</th><th>做法</th></tr></thead>
+      <tbody>
+        <tr><td><span class="sw" style="background:var(--tv)"></span>电视</td><td>发光贴图，亮度和颜色跟着舞台变</td></tr>
+        <tr><td><span class="sw" style="background:var(--lamp)"></span>台灯</td><td>暖色，很弱，全片常亮，画面里看得见</td></tr>
+        <tr><td><span class="sw" style="background:var(--tv);opacity:.5"></span>月光和天光</td><td>窗洞上的面光源。夜里是蓝的，从不为零</td></tr>
+        <tr><td><span class="sw" style="background:var(--sun)"></span>太阳</td><td>仰角 5°，出窗后偏向后墙 25°；300 粒灰尘</td></tr>
+      </tbody></table></div>
+  </div>
+  <p class="note">陈设十件，除窗帘外全部来自 Poly Haven：电视、电视柜、书桌、台灯、笔记本、闹钟、植物、画框、床、窗帘。植物放在窗边是为了让叶影落在后墙上，光一变影子就动。电视机壳要拆掉原来的屏幕面换上发光面和玻璃，拆不干净就自己建一个同尺寸的（待测）。</p>
+</section>
+
+<section>
+  <div class="sechead"><span class="sheetno">图纸 04</span><h2>纸舞台和贴近的机位</h2><p>{{NSHOTS}} 个镜头里，除了 3 次房间全景（S04、S38、S69），其余都贴着舞台或电视拍。舞台按人的尺寸搭，lin 直接站在里面；电视里放的是它正面机位的画面。</p></div>
+  <figure style="max-width:960px"><div class="draw">{{STAGESEC}}</div><figcaption><b>剖面</b>单位是米。地板的橙色线表示上了漆、有倒影。</figcaption></figure>
+  <div class="cols">
+    <figure><div class="draw">{{STAGEPLAN}}</div><figcaption><b>平面和机位</b>圆角标签是镜号，箭头是拍摄方向。绿色小块是六个纸人，左边的数字是离台口的米数。</figcaption></figure>
+    <div style="display:flex;flex-direction:column;gap:18px;min-width:0">
+      <figure><div class="draw">{{PUPPET}}</div><figcaption><b>动物头纸人</b>左边正面，右边侧面。</figcaption></figure>
+      <div class="tw"><table>
+        <thead><tr><th>纸人</th><th>头</th><th>身体</th></tr></thead>
+        <tbody>
+          <tr><td>一</td><td>鬣狗</td><td>西装</td></tr>
+          <tr><td>二</td><td>秃鹫</td><td>风衣</td></tr>
+          <tr><td>三</td><td>乌鸦</td><td>校服</td></tr>
+          <tr><td>四</td><td>狼</td><td>外卖服</td></tr>
+          <tr><td>五</td><td>鳄鱼</td><td>围裙</td></tr>
+          <tr><td>六</td><td>野猪</td><td>工装</td></tr>
+        </tbody></table></div>
+    </div>
+  </div>
+  <div class="cols">
+    <div class="tw"><table>
+      <thead><tr><th>舞台</th><th>规格</th></tr></thead>
+      <tbody>
+        <tr><td>台口</td><td>4.0 × 3.0 米，形状是显像管的圆角框</td></tr>
+        <tr><td>内部</td><td>宽 5.2、高 3.6、深 4.5 米</td></tr>
+        <tr><td>纸片</td><td>看得到切边和厚度；背面留白，有铅笔编号</td></tr>
+        <tr><td>材质的光泽差</td><td>哑光的纸、上漆的木地板、缎面的红幕、黄铜的灯座、玻璃灯泡</td></tr>
+        <tr><td>灯，七种</td><td>台口灯泡 16 只、脚灯、顶灯条、追光、路灯、天幕背光、后墙的裸灯泡；另有 30 扇小窗各一盏</td></tr>
+        <tr><td>机关</td><td>地板滑槽、三道吊杆、纸太阳的滑杆、黑衣的纸手</td></tr>
+        <tr><td>纸片怎么动</td><td>每秒 12 个姿势，像定格动画；镜头每秒 24 帧</td></tr>
+        <tr><td>红纸</td><td>20 × 20 厘米，全片唯一的红色；折成鸟后约 30 厘米</td></tr>
+      </tbody></table></div>
+    <div class="tw"><table>
+      <thead><tr><th>lin</th><th>规格</th></tr></thead>
+      <tbody>
+        <tr><td>出场</td><td>{{NL}} 个镜头共 {{SL}} 秒。只在副歌的头一句、空台、托鸟和结尾出现</td></tr>
+        <tr><td>景别</td><td>胸上和腰上，不拍全身</td></tr>
+        <tr><td>姿势，七个</td><td>手到胸前、腰前相握、垂手侧脸、托鸟、放飞、垂手、低头闭眼</td></tr>
+        <tr><td>动作的限制</td><td>上臂贴近身体，手不高过胸口，手离身体和衣服至少 6 厘米；不伸臂去指，不走，不转身</td></tr>
+        <tr><td>换姿势</td><td>只发生在换镜头的叠化里。镜头里只有落定、呼吸、重心微移</td></tr>
+        <tr><td>眼睛</td><td>每个镜头一个落点：镜头，或掌心的鸟</td></tr>
+        <tr><td>脸和口型</td><td>沿用母进程已经过关的那一套</td></tr>
+        <tr><td>不用的东西</td><td>动捕、麦克风、逐帧碰撞</td></tr>
+      </tbody></table></div>
+  </div>
+</section>
+
+<section>
+  <div class="sechead"><span class="sheetno">图纸 05</span><h2>全片在一条时间线上</h2><p>一切读同一个时钟：影片的秒数，帧号是秒数乘 24。拍点是从歌里实测的，每个镜头都从拍点开始。每个四小节的乐句放三个镜头：六拍、四拍、六拍。全片 {{N6}} 个镜头长六拍（约 3.2 秒），{{N4}} 个长四拍（约 2.2 秒），没有超过 {{LONGEST}} 秒的。</p></div>
+  <figure class="wide"><div class="draw">{{TIMELINE}}</div><figcaption><b>时间线</b>横向可以滚动。镜头一行里，上面是镜号，下面是焦距的毫米数。鼠标停在色块上能看到全名。</figcaption></figure>
+  <div class="legend"><span><i style="background:var(--stage);opacity:.45"></i>纸剧场</span><span><i style="background:var(--crowd);opacity:.55"></i>动物头纸人</span><span><i style="background:var(--her);opacity:.6"></i>lin</span><span><i style="background:var(--tv);opacity:.45"></i>房间和电视</span><span><i style="background:var(--lamp);opacity:.6"></i>暖光</span><span><i style="background:var(--sun);opacity:.7"></i>阳光</span></div>
+</section>
+
+<section>
+  <div class="sechead"><span class="sheetno">图纸 06</span><h2>{{NSHOTS}} 个镜头</h2><p>一个镜头只做一种运动、只发生一件事。焦距按全画幅写。光圈按“什么必须看清”定：一排六个纸人要都清楚就收到 f/4，拍情绪才开大。</p></div>
+  <div class="tw">{{SHOTS}}</div>
+  <ul class="plain note">
+    <li>怎么接：同一段里用 4 帧的软切，落在拍点上；换类型时叠化一拍（约半秒），或者让一条纸带划过镜头；进出电视时把两边的画面对准了再叠化一拍。没有生硬的直切。</li>
+    <li>字幕固定在画面下方居中，只淡入淡出。每个镜头构图时把这一条留成暗而少细节的地方：舞台镜头是地板，房间镜头是地板和床沿。</li>
+    <li>每个贴近的镜头都有三层：虚的前景、清楚的主体、虚的背景。拍纸人时机位在它们的眼睛高度，1.1 米。</li>
+  </ul>
+</section>
+
+<section>
+  <div class="sechead"><span class="sheetno">图纸 07</span><h2>电视屏幕是怎么工作的</h2></div>
+  <div class="cols">
+    <div><h3>是渲出来的画面，不是录像</h3><p>舞台是时间的函数。给一个影片时间，它就摆出那一刻：每张纸片在哪、每盏灯多亮、lin 是哪个姿势。没有随机数，不读系统时钟，同一个时间永远得到同一幅画面。</p></div>
+    <div><h3>从舞台到屏幕</h3><p>一台正面机位从 0 秒走到 186.6 秒，存下 1440 × 1080 的画面序列。房间里，电视屏幕是一块以这套画面为发光颜色的面，外面罩一层鼓起的玻璃，所以它会发光、照亮房间、映出窗户。</p></div>
+    <div><h3>一个文件管所有的时间</h3><p>每个音节的起止时间存在一个文件里。口型读它来换嘴形，字幕读它来上字，小窗读它来一声亮一扇，音效读它来放声音。所以窗和“活着”是同一帧。</p></div>
+    <div><h3>进出电视</h3><p>镜头推到屏幕占满画面时（S07），屏幕上的画面和舞台正面机位的画面是同一幅，叠化一拍就进了舞台。S61 到 S62 反过来退出来。</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="sechead"><span class="sheetno">图纸 08</span><h2>渲染</h2></div>
+  <div class="cols">
+    <div class="tw"><table>
+      <thead><tr><th>引擎</th><th></th></tr></thead>
+      <tbody>
+        <tr><td>渲染器</td><td>Unity 6，URP，实时</td></tr>
+        <tr><td>间接光</td><td>事先烤进探针，房间 6 套、舞台按段落分套，按时钟过渡</td></tr>
+        <tr><td>每帧</td><td>8 个子帧叠加：运动模糊、软阴影边、抗锯齿</td></tr>
+        <tr><td>反射</td><td>玻璃和上漆地板用实时反射</td></tr>
+        <tr><td>色调</td><td>高光过渡柔的曲线（The Edge 用 AgX；Unity 里怎么做待查）</td></tr>
+        <tr><td>输出</td><td>2560 × 1440，共 {{NFRAMES}} 帧</td></tr>
+      </tbody></table></div>
+    <div class="tw"><table>
+      <thead><tr><th>耗时</th><th></th></tr></thead>
+      <tbody>
+        <tr><td>已测</td><td>旧工程 1080p 抓 300 帧约 20 秒</td></tr>
+        <tr><td>电视画面一遍</td><td>约 10 分钟（估）</td></tr>
+        <tr><td>全片一遍</td><td>约 40–70 分钟（估）</td></tr>
+        <tr><td>改一个镜头</td><td>只重渲那个文件夹，约 1 分钟（估）</td></tr>
+        <tr><td>The Edge 作对比</td><td>光线追踪，每帧 12–17 秒，10 台云端机器</td></tr>
+      </tbody></table></div>
+  </div>
+  <ul class="plain note">
+    <li>探针烤光并按时间过渡：本机 Unity 源码里确认有这个功能，还没跑过。第一遍的 8 秒就是为了测它。不行的后备是把间接光烤进贴图，只在换镜头时换。</li>
+    <li>头发是模拟出来的，不是时间的函数。办法是先按顺序模拟一遍，把每帧的骨骼存下来，之后渲染只读缓存。</li>
+    <li>审片只发渲染好的视频，不用 Unity 的实时播放器。</li>
+  </ul>
+</section>
+
+<section>
+  <div class="sechead"><span class="sheetno">图纸 09</span><h2>后期和声音</h2></div>
+  <div class="cols">
+    <div><h3>画面</h3><p>每一帧加亮部周围的暖色光晕、一条轻微的对比曲线、柔和的暗角和细颗粒。生成的视频片段也过同一套，和渲染的画面拉平。</p></div>
+    <div><h3>歌</h3><p>原曲不动，是整条片子的底。镜头反过来跟着它的小节走。</p></div>
+    <div><h3>音效</h3><p>22 处，都是纸和灯的声音，时间写在时间表上。开头 8 秒和结尾 8 秒歌声很轻，由通电声、静电声、关机声和远处的鸟叫撑着。其余压在歌下面约 18 分贝。先找公有领域的音效，找不到再合成。</p></div>
+    <div><h3>交付</h3><p>响度 −14 LUFS。母版加 12 Mbps 投稿版，封面，投稿信息，一页制作说明。片尾有素材署名和一行求助热线。</p></div>
+  </div>
+  <h3>我保证不了的</h3>
+  <ul class="plain">
+    <li>lin“一个镜头一个小姿势”会不会仍然显得僵：第一遍你只提了镜头太长，还没对她的表演表态。现在她每个镜头只有 3.2 秒。</li>
+    <li>镜头数比原来多了三分之一，比“四分之一”多一些。原因是我把上限定在 3.3 秒，这样才没有四秒以上的镜头。嫌碎可以把一部分四拍的镜头并回去。</li>
+    <li>口型只到元音级，胸上的正面镜头可能看得出不准。</li>
+    <li>我没法按正常速度看片，只能靠数字和逐帧图。</li>
+    <li>母进程正在改脚本，复制过来可能编译不过。</li>
+    <li>四次视频生成没有重试的余地，每一处都留了代码做的版本。</li>
+  </ul>
+</section>
+
+</div>

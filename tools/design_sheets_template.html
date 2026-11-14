@@ -1,0 +1,254 @@
+<title>显像管的外侧 设计图纸</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<style>
+/* layout: one column of drawing sheets; each sheet is a figure with its numbers beside or under it; the only red on the page is the red paper */
+:root {
+  --bg: #E9EDF1; --sheet: #F7F9FB; --ink: #17212B; --muted: #566472; --rule: #B5C0CA; --soft: #DCE3EA;
+  --red: #C2332A; --tv: #2A78B4; --lamp: #C0701F; --sun: #B8900A; --stage: #2F7F6E; --her: #6753A6;
+  --text: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+  --mono: "IBM Plex Mono", "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0E141A; --sheet: #151D26; --ink: #E3E9EF; --muted: #93A2B0; --rule: #3A4957; --soft: #212C38;
+  --red: #E85C50; --tv: #63B0E6; --lamp: #E59B4B; --sun: #E6C344; --stage: #62BBA6; --her: #A698E0; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0E141A; --sheet: #151D26; --ink: #E3E9EF; --muted: #93A2B0; --rule: #3A4957; --soft: #212C38;
+  --red: #E85C50; --tv: #63B0E6; --lamp: #E59B4B; --sun: #E6C344; --stage: #62BBA6; --her: #A698E0; color-scheme: dark }
+
+body { background: var(--bg); color: var(--ink); font-family: var(--text); font-size: 15px; line-height: 1.75;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 64px; }
+.page { max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 44px; }
+h1, h2, h3 { margin: 0; text-wrap: balance; line-height: 1.3; }
+h1 { font-size: clamp(30px, 5vw, 46px); font-weight: 700; letter-spacing: 0.02em; }
+h2 { font-size: 22px; font-weight: 700; }
+h3 { font-size: 16px; font-weight: 700; }
+p { margin: 0; max-width: 40em; }
+.eyebrow { font-size: 12.5px; color: var(--muted); letter-spacing: 0.08em; }
+.lede { font-size: 18px; line-height: 1.8; max-width: 34em; }
+.lede b { color: var(--red); font-weight: 700; }
+header { display: flex; flex-direction: column; gap: 14px; border-bottom: 2px solid var(--ink); padding-bottom: 22px; }
+.spec { display: flex; flex-wrap: wrap; gap: 6px 22px; font-family: var(--mono); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.spec b { color: var(--ink); font-weight: 500; }
+section { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.sechead { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid var(--rule); padding-top: 14px; }
+.note { color: var(--muted); font-size: 13.5px; }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; align-items: start; }
+.cols > * { min-width: 0; }
+figure { margin: 0; background: var(--sheet); border: 1px solid var(--rule); display: flex; flex-direction: column; min-width: 0; }
+figure .draw { padding: 10px; overflow-x: auto; }
+figure svg { display: block; width: 100%; height: auto; }
+figure.wide .draw svg { width: auto; max-width: none; }
+figcaption { border-top: 1px solid var(--rule); padding: 8px 12px; font-size: 12.5px; color: var(--muted); display: flex; gap: 10px; flex-wrap: wrap; }
+figcaption b { color: var(--ink); font-family: var(--mono); font-weight: 500; }
+
+/* decisions */
+.decide { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 0; border: 1px solid var(--ink); background: var(--sheet); }
+.decide > div { padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; border-bottom: 1px solid var(--rule); border-right: 1px solid var(--rule); min-width: 0; }
+.decide .k { font-family: var(--mono); font-size: 12px; color: var(--red); letter-spacing: 0.06em; }
+.decide p { font-size: 14px; line-height: 1.7; }
+.decide .cost { color: var(--muted); font-size: 13px; }
+
+/* tables */
+.tw { overflow-x: auto; border: 1px solid var(--rule); background: var(--sheet); }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; line-height: 1.6; }
+th, td { text-align: left; vertical-align: top; padding: 8px 12px; border-bottom: 1px solid var(--soft); }
+th { font-weight: 500; color: var(--muted); font-size: 12.5px; border-bottom: 1px solid var(--rule); white-space: nowrap; background: var(--sheet); }
+tr:last-child td { border-bottom: 0; }
+.num { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 12.5px; white-space: nowrap; }
+.nowrap { white-space: nowrap; }
+.sub { color: var(--muted); }
+table.shots { min-width: 940px; }
+table.shots .act { min-width: 300px; }
+.tag { display: inline-block; font-size: 12px; padding: 0 7px; border: 1px solid var(--rule); border-radius: 2px; white-space: nowrap; }
+.tag.tP { border-color: var(--stage); color: var(--stage); } .tag.tR { border-color: var(--her); color: var(--her); } .tag.tX { border-color: var(--tv); color: var(--tv); }
+.chip { display: inline-block; font-size: 11.5px; padding: 0 6px; margin-left: 4px; background: var(--her); color: var(--sheet); border-radius: 2px; }
+.sw { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: baseline; }
+ol.steps, ul.plain { margin: 0; padding-left: 1.3em; display: flex; flex-direction: column; gap: 8px; max-width: 46em; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 12.5px; color: var(--muted); }
+.legend i { display: inline-block; width: 14px; height: 10px; margin-right: 6px; border-radius: 2px; vertical-align: baseline; }
+
+/* drawings */
+svg text { font-family: var(--text); }
+.t { fill: var(--ink); font-size: 12px; } .tm { fill: var(--muted); font-size: 11.5px; } .td { fill: var(--muted); font-size: 11px; font-family: var(--mono); }
+.tp { fill: var(--sheet); font-size: 11px; font-family: var(--mono); } .tb { fill: var(--ink); font-size: 11px; }
+.tsun { fill: var(--sun); font-size: 11.5px; } .tred { fill: var(--red); font-size: 11.5px; } .ttv { fill: var(--tv); font-size: 11.5px; }
+.ln { stroke: var(--ink); stroke-width: 1; fill: none; } .dim { stroke: var(--muted); stroke-width: 0.8; fill: none; }
+.wall { fill: var(--ink); } .floor { fill: var(--sheet); } .win { fill: var(--soft); stroke: var(--ink); stroke-width: 1; }
+.furn { fill: var(--soft); stroke: var(--ink); stroke-width: 1; } .furn2 { fill: var(--rule); stroke: var(--ink); stroke-width: 0.8; }
+.tvbox { fill: var(--rule); stroke: var(--ink); stroke-width: 1.2; } .glass { stroke: var(--tv); stroke-width: 4; stroke-linecap: round; }
+.dash { fill: none; stroke: var(--stage); stroke-width: 1; stroke-dasharray: 3 3; }
+.her { fill: var(--her); } .herf { fill: var(--her); } .her2 { fill: none; stroke: var(--her); stroke-width: 1.4; stroke-dasharray: 3 3; } .herl { stroke: var(--her); stroke-width: 2.4; }
+.curtain { fill: none; stroke: var(--muted); stroke-width: 1.2; }
+.sunbeam { fill: var(--sun); opacity: 0.16; } .sunray { stroke: var(--sun); stroke-width: 1.2; stroke-dasharray: 6 4; fill: none; }
+.tvbeam { fill: var(--tv); opacity: 0.14; } .lampglow { fill: var(--lamp); opacity: 0.16; } .lampdot { fill: var(--lamp); stroke: var(--ink); stroke-width: 0.8; }
+.redf { fill: var(--red); } .sight { stroke: var(--her); stroke-width: 1; stroke-dasharray: 5 4; fill: none; }
+.cam { stroke: var(--ink); stroke-width: 1.3; fill: none; } .camf { fill: var(--ink); stroke: none; } .pill { fill: var(--ink); } .strip { fill: var(--ink); }
+.layer { stroke: var(--stage); stroke-width: 2.2; } .lead { fill: none; stroke: var(--rule); stroke-width: 0.8; } .bar { fill: var(--ink); }
+.spot { fill: var(--lamp); opacity: 0.18; }
+.grid { stroke: var(--soft); stroke-width: 1; }
+.blk { stroke: var(--sheet); stroke-width: 1; }
+.Bsec { fill: var(--soft); } .Bstage { fill: var(--stage); fill-opacity: 0.30; } .Bher { fill: var(--her); fill-opacity: 0.30; } .Bpup { fill: var(--stage); fill-opacity: 0.55; }
+.Lk { fill: var(--ink); fill-opacity: 0.16; } .Ltv { fill: var(--tv); fill-opacity: 0.28; } .Llamp { fill: var(--lamp); fill-opacity: 0.42; } .Ldim { fill: var(--ink); fill-opacity: 0.09; }
+.Ldusk { fill: var(--red); fill-opacity: 0.22; } .Lblue { fill: var(--tv); fill-opacity: 0.12; } .Lsun { fill: var(--sun); fill-opacity: 0.55; }
+.WR { fill: var(--her); fill-opacity: 0.30; } .WP { fill: var(--stage); fill-opacity: 0.30; } .WX { fill: var(--tv); fill-opacity: 0.34; } .W- { fill: var(--soft); }
+.loud { fill: var(--muted); opacity: 0.45; } .sfx { stroke: var(--rule); stroke-width: 1; } .cap { fill: var(--muted); opacity: 0.6; }
+</style>
+
+<div class="page">
+
+<header>
+  <div class="eyebrow">あいみょん《生きていたんだよな》纸剧场音乐片　设计图纸 v1　2026-11-13</div>
+  <h1>显像管的外侧</h1>
+  <p class="lede">深夜，她在电视里的纸剧场上看见<b>一张红纸</b>被人换掉；天亮前，那张红纸折成鸟飞出屏幕，落在她手里；她关掉电视，拉开窗帘。</p>
+  <div class="spec"><span><b>193.1</b> 秒</span><span>每秒 <b>24</b> 帧，共 <b>{{NFRAMES}}</b> 帧</span><span><b>{{NSHOTS}}</b> 个镜头，平均 <b>{{AVG}}</b> 秒</span><span>房间 <b>4</b> 个光源</span><span>歌曲 <b>{{BPM}}</b> 拍/分，切点都在拍上</span></div>
+  <p>这一版照 The Edge 的做法来：先把布景尺寸、每个镜头的焦距和机位、全片的时间线定在纸上，你确认之后再搭。下面的东西都还没有做。图上的数字是设计值，标“待测”的要在搭的时候量。</p>
+</header>
+
+<section>
+  <div class="sechead"><h2>先要你定的四件事</h2><p class="note">这四件事定了，后面的图纸才成立。每件都写了我的建议和代价。</p></div>
+  <div class="decide">
+    <div><span class="k">A　谁来演</span><h3>房间里的她只看，不唱</h3><p>三维的她不对口型，动作小而慢，脸只近拍 {{NFACE}} 次。唱和大动作交给电视里 11 厘米高的纸偶她。</p><p class="cost">代价：这不再是一条“角色对着镜头唱歌”的片子。</p></div>
+    <div><span class="k">B　电视里是什么</span><h3>纸剧场真的装在电视机壳里</h3><p>它是一个 46 × 34 × 38 厘米的微缩盒子，和房间在同一个场景里。镜头能从里面回头拍到她，光是真的漏出来，鸟飞出来是一条连续的路。</p><p class="cost">代价：定妆 v1–v3 那套“另搭大场景再贴到屏幕上”的做法作废，纸街角按新尺寸重摆，纸片图案可以复用。</p></div>
+    <div><span class="k">C　砍掉什么</span><h3>三处不做了</h3><p>旧脚本里的“房间四壁像立体书翻开”“窗外的纸城市”“她走进纸街角”不做。亮起来的小窗搬进电视里；窗外只有光。</p><p class="cost">代价：结尾少一个大机关，换成日出。</p></div>
+    <div><span class="k">D　先做哪一段</span><h3>样片做 S08–S10，12.5 秒</h3><p>0:42.8–0:55.2：红纸微距、从电视里回头拍、焦点移到玻璃外的她。最难的三件事都在这一段里。</p><p class="cost">样片之前先做一次光照测试，出三张静帧。</p></div>
+  </div>
+  <p class="note">没变的：故事线（红纸、被换掉、折成鸟、落在手上、天亮），不换装，不出现人体、坠落和血迹，底部中日双语字幕只淡入淡出，片尾加求助热线。</p>
+</section>
+
+<section>
+  <div class="sechead"><h2>照它的方法，对上了哪些</h2></div>
+  <div class="tw"><table>
+    <thead><tr><th></th><th>The Edge</th><th>这一版设计</th></tr></thead>
+    <tbody>
+      <tr><td>布景</td><td>4.35 × 3.96 × 2.69 米的封闭房间，一扇窗</td><td>2.73 × 3.64 × 2.40 米的六叠间，一扇窗</td></tr>
+      <tr><td>主道具</td><td>按实物尺寸做的笔记本，77 个键</td><td>20 英寸显像管电视，里面是 8 层纸片的微缩剧场</td></tr>
+      <tr><td>光源</td><td>太阳、天光、台灯、屏幕</td><td>电视、台灯、天光、太阳，再加舞台里的 5 盏小灯</td></tr>
+      <tr><td>镜头</td><td>59 秒 13 个，每个写明焦距和光圈</td><td>193 秒 {{NSHOTS}} 个，每个写明焦距、光圈、距离</td></tr>
+      <tr><td>贴近主道具</td><td>13 个里 10 个离笔记本不到 80 厘米</td><td>{{NSHOTS}} 个里 {{NINSIDE}} 个在电视玻璃 80 厘米以内或玻璃里面</td></tr>
+      <tr><td>主角</td><td>方块玩具，靠挤压拉伸来演</td><td>纸偶，靠换嘴、换手、关节来演；三维的她只当观看的人</td></tr>
+      <tr><td>光讲故事</td><td>黄昏、入夜、日出</td><td>冷的新闻光、暖的窗、纸上的一天、一盏裸灯、日出</td></tr>
+      <tr><td>时钟</td><td>影片秒数 × 24，所有轨道都读它</td><td>一样，写在 film_v1.json 里</td></tr>
+      <tr><td>渲染</td><td>光线追踪，每帧 12–17 秒，租 10 台云端机器</td><td>Unity 实时渲染加烤好的间接光，目标每帧 1 秒以内，本机</td></tr>
+    </tbody></table></div>
+</section>
+
+<section>
+  <div class="sechead"><h2>布景：一间房，一扇窗</h2><p>房间按日本的六叠间定尺寸。里面只放八样东西，全部来自同一个素材库，风格不会打架。原来那把课椅、旧书架、书包、便当盒都拿掉了。</p></div>
+  <div class="cols">
+    <figure><div class="draw">{{PLAN}}</div><figcaption><b>图 1</b>平面图，从上往下看。蓝色是电视的光，橙色是台灯，黄色是拉开窗帘后的阳光。</figcaption></figure>
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <figure><div class="draw">{{ELEV}}</div><figcaption><b>图 2</b>立面图。虚线框是电视里的纸剧场。</figcaption></figure>
+      <figure><div class="draw">{{SUN}}</div><figcaption><b>图 3</b>日出时的光路。</figcaption></figure>
+    </div>
+  </div>
+  <div class="tw"><table>
+    <thead><tr><th>陈设</th><th>尺寸</th><th>来源</th><th>备注</th></tr></thead>
+    <tbody>
+      <tr><td>电视</td><td class="num">52 × 53.4 × 45.5 cm<br>屏幕 39.6 × 29.8 cm</td><td>Poly Haven，Television 02，放大到 1.3 倍</td><td>要把原模型的屏幕面拆掉，露出机壳内部。拆不干净就自己建一个同尺寸的机壳（待测）</td></tr>
+      <tr><td>电视柜</td><td class="num">55 × 55.1 × 45 cm</td><td>Poly Haven，Side Table 01</td><td>屏幕中心离地 0.88 米，比她的眼睛低 17 厘米</td></tr>
+      <tr><td>床</td><td class="num">197 × 85.5 cm<br>靠背高 113 cm</td><td>Poly Haven，Vintage Day Bed</td><td>她坐在床沿。床沿高度按她的小腿长调到约 42 厘米（待测）</td></tr>
+      <tr><td>书桌</td><td class="num">71 × 55 cm<br>桌面高约 74 cm</td><td>Poly Haven，School Desk 01</td><td>模型总高 88 厘米，桌面高度待测</td></tr>
+      <tr><td>台灯</td><td class="num">高 89 cm，臂展 61 cm</td><td>Poly Haven，Desk Lamp Arm 01</td><td>全片常亮</td></tr>
+      <tr><td>笔记本</td><td class="num">30 × 21 cm</td><td>Poly Haven，Binder Notebook，缩小</td><td>和电视里小窗的剪影是同一件东西</td></tr>
+      <tr><td>闹钟</td><td class="num">13 × 17 cm</td><td>Poly Haven，Alarm Clock 01</td><td>同上</td></tr>
+      <tr><td>窗帘</td><td class="num">1.85 × 1.35 m</td><td>自己做的褶布</td><td>遮光。2:28 起帘缝透蓝，3:03 拉开</td></tr>
+    </tbody></table></div>
+</section>
+
+<section>
+  <div class="sechead"><h2>四个光源</h2><p>以前的问题是只有直射光加补光灯，暗部死黑。这一版房间里只有四个光源，每个都有来历，它们打到墙上再弹回来的光会事先烤好。光怎么随时间变，见后面的总时间线。</p></div>
+  <div class="tw"><table>
+    <thead><tr><th>光源</th><th>在哪</th><th>颜色和强弱</th><th>怎么做</th></tr></thead>
+    <tbody>
+      <tr><td class="nowrap"><span class="sw" style="background:var(--tv)"></span>电视</td><td>屏幕 39.6 × 29.8 厘米，中心高 0.88 米，朝着床</td><td>跟着舞台变：冷白、暖黄、橙、深蓝、近黑。它是夜里的主光</td><td>舞台里的灯透过玻璃漏出来。再加一盏带阴影的聚光灯，灯的图案取自舞台正面的缩小画面，所以电视里演什么，她脸上和地板上就是什么颜色</td></tr>
+      <tr><td class="nowrap"><span class="sw" style="background:var(--lamp)"></span>台灯</td><td>书桌上，灯头高 1.05 米，朝下</td><td>暖色，很弱，全片常亮</td><td>给她背后一道暖边，给全景一个暖的前景，结尾照着笔记本上的鸟</td></tr>
+      <tr><td class="nowrap"><span class="sw" style="background:var(--tv);opacity:.5"></span>天光</td><td>窗，1.65 × 1.15 米</td><td>2:28 之前为零；之后从帘缝透进来的蓝，慢慢变亮</td><td>贴在窗洞上的一块面光源</td></tr>
+      <tr><td class="nowrap"><span class="sw" style="background:var(--sun)"></span>太阳</td><td>仰角 5°，偏向电视一侧 12°</td><td>3:03 拉开窗帘后进来，金色，慢慢升到 7°</td><td>平行光加 300 粒灰尘。光先照到电视的顶和侧面，再擦过桌上的鸟（图 3）</td></tr>
+    </tbody></table></div>
+</section>
+
+<section>
+  <div class="sechead"><h2>电视里的纸剧场</h2><p>日本管这种分层立起来的纸景叫立版古，早年的电视被叫作“电气纸芝居”。这台电视里就是一座立版古：8 层纸片，最前面是玻璃，最后面是纸板后墙。</p></div>
+  <figure style="max-width:900px"><div class="draw">{{THEATRE}}</div><figcaption><b>图 4</b>剖面图。橙色圆点是舞台里的 5 盏小灯：顶灯条、追光、路灯、天幕背光、后墙上的裸灯泡。</figcaption></figure>
+  <div>
+    <div class="tw"><table>
+      <thead><tr><th>东西</th><th>规格</th></tr></thead>
+      <tbody>
+        <tr><td>舞台</td><td>宽 46、高 34、深 38 厘米；台口 39.6 × 29.8 厘米</td></tr>
+        <tr><td>纸片</td><td>0.3 毫米卡纸裱在 1 毫米灰板上，看得到切边和厚度；背面留白，有铅笔编号</td></tr>
+        <tr><td>纸偶她</td><td>高 11 厘米。正面、背面、遮眼三个身体；头可以歪 12°；上臂和前臂有线缝的关节；5 张替换嘴（闭、あ、い、う、お），3 张替换眼</td></tr>
+        <tr><td>纸人</td><td>两串，每个高 8–9 厘米，连成一条从侧幕滑入；手里的白纸片可以翻亮</td></tr>
+        <tr><td>小窗</td><td>近楼和远楼上共 30 扇，每扇 1.5 厘米，后面衬半透明纸和一盏小灯；剪影 8 种：台灯、闹钟、笔记本、雨伞、自行车、书包、鞋、便当</td></tr>
+        <tr><td>红纸</td><td>2 × 2 厘米，全片唯一的红色。折成鸟后约 3 厘米</td></tr>
+        <tr><td>机关</td><td>地板上的滑槽（纸人、纸偶的杆）、三道吊杆（纸带、纸云、窗灯）、纸太阳的滑杆、黑衣的纸手</td></tr>
+        <tr><td>动的方式</td><td>纸片每秒 12 个姿势，像定格动画；镜头每秒 24 帧，是连续的</td></tr>
+      </tbody></table></div>
+  </div>
+  <h3>电视是怎么工作的</h3>
+  <ol class="steps">
+    <li>纸剧场和房间在同一个场景里，没有第二个世界，也没有贴上去的画面。所以从房间看进去有真实的前后错位，镜头可以一路推进玻璃，也可以从里面回头拍到她。</li>
+    <li>舞台是时间的函数。每张纸片的位置、每盏灯的亮度、纸偶的姿势，只由影片的秒数决定，不用随机数，也不读系统时钟。任何一帧都可以单独重渲。唯一的例外是她的头发，那是按顺序模拟出来的。</li>
+    <li>电视的光就是舞台的光。舞台亮几扇窗，房间就暖几分；舞台撤景，房间跟着暗。</li>
+    <li>玻璃是一块微微鼓起的透明面，会反光，映得出台灯、她的轮廓和日出。上面叠一层很淡的扫描线，镜头靠近到 20 厘米以内时淡掉。开机和关机时画面是一条线、一个点。</li>
+    <li>每张纸片在时间表里都有名字，镜头按名字对焦，比如“对红纸”“对纸偶的嘴”。</li>
+  </ol>
+</section>
+
+<section>
+  <div class="sechead"><h2>机位图</h2><p>{{NSHOTS}} 个镜头里，{{NINSIDE}} 个在电视玻璃 80 厘米以内或者玻璃里面；能看到整个房间的只有 3 个（开头、中间、结尾）。她的脸近拍 {{NFACE}} 次，都不唱。</p></div>
+  <div class="cols">
+    <figure><div class="draw">{{CAMPLAN}}</div><figcaption><b>图 5</b>房间里的机位。</figcaption></figure>
+    <figure><div class="draw">{{STAGEPLAN}}</div><figcaption><b>图 6</b>电视里的机位，从上往下看。左边的数字是纸片离玻璃的厘米数。</figcaption></figure>
+  </div>
+  <p class="note">在这么近的距离上，镜头能看到多宽是算过的。例如 35 毫米镜头离表演面 14 厘米时只能看到 14 厘米宽，所以要看到整个台口的镜头（S18、S27）都退到玻璃外 38 厘米。光圈写的是起点，这个尺度下景深会极浅，粗排时按能不能看清再收。</p>
+</section>
+
+<section>
+  <div class="sechead"><h2>总时间线</h2><p>全片只有一个时钟：影片的秒数。镜头、光、舞台、她、纸偶、音效、字幕都从它读时间。切点已经对到实测的拍点上。</p></div>
+  <figure class="wide"><div class="draw">{{TIMELINE}}</div><figcaption><b>图 7</b>横向可以滚动。把鼠标停在色块上能看到完整的名字和起止时间。</figcaption></figure>
+  <div class="legend"><span><i style="background:var(--her);opacity:.45"></i>房间</span><span><i style="background:var(--stage);opacity:.45"></i>电视里</span><span><i style="background:var(--tv);opacity:.5"></i>穿过玻璃，或电视的冷光</span><span><i style="background:var(--lamp);opacity:.6"></i>暖光</span><span><i style="background:var(--sun);opacity:.7"></i>阳光</span></div>
+</section>
+
+<section>
+  <div class="sechead"><h2>逐镜头表</h2><p>“入内”指镜头在玻璃里面、离玻璃多远；“玻璃外”指在房间一侧离玻璃多远。焦距按全画幅相机写。</p></div>
+  <div class="tw">{{SHOTS}}</div>
+</section>
+
+<section>
+  <div class="sechead"><h2>渲染</h2><p>直射光和阴影实时算。墙面弹回来的间接光事先烤进探针，一共烤六套：电视冷白、电视暖、电视橙、电视深蓝、只有台灯、日出。播放时按总时钟在相邻两套之间过渡。</p></div>
+  <div class="tw"><table>
+    <thead><tr><th>方案</th><th>规格</th><th>全片耗时</th><th>和上一档的差别</th></tr></thead>
+    <tbody>
+      <tr><td>甲　快</td><td>1080p，每帧算 1 次</td><td>约 6–10 分钟（估）</td><td>—</td></tr>
+      <tr><td><b>乙　建议</b></td><td>1440p，每帧算 8 次再叠加</td><td>约 40–70 分钟（估）</td><td>运动模糊是真的，阴影边缘更软，纸片的切边不闪</td></tr>
+      <tr><td>丙　光线追踪</td><td>换渲染管线，或房间改回 Blender</td><td>约 10–20 小时（估）</td><td>光影最接近 The Edge。但材质要重做，她的卡通材质用不了。不建议</td></tr>
+    </tbody></table></div>
+  <ul class="plain note">
+    <li>已测的只有一个数：现在的工程 1080p 连续抓 300 帧用了约 20 秒。上表都是按它推的，没有实测。</li>
+    <li>烤探针并按时间过渡这个功能，我在本机的 Unity 源码里确认过当前版本有，但还没跑过。所以样片之前先做光照测试。不行的话，后备是把间接光烤进贴图，只在切镜头时换。</li>
+    <li>选哪一档等样片实测后再请你定，现在不用选。</li>
+  </ul>
+</section>
+
+<section>
+  <div class="sechead"><h2>声音</h2><p>歌是整条片子的底，不动。在它下面加一层很轻的音效，每一声的时间都写在总时间线上，和画面是同一帧。</p></div>
+  <ul class="plain">
+    <li>开头 8 秒和结尾 8 秒歌声很轻，这两处由音效撑着：通电声和显像管的静电声；关机声、窗帘环、远处的鸟叫。</li>
+    <li>中间的音效都是纸的声音：纸带拉出、纸片翻亮、擦纸两秒、折纸六下、拍翅。压在歌下面约 18 分贝，听得出但不抢。</li>
+    <li>来源先找公有领域的音效库，找不到再合成。整体响度定在 −14 LUFS。</li>
+  </ul>
+</section>
+
+<section>
+  <div class="sechead"><h2>你确认之后的顺序</h2></div>
+  <ol class="steps">
+    <li>光照测试。空房间加电视盒，烤一次间接光，出三张静帧：现在的做法、烤光之后、日出。这一步决定渲染走哪条路。</li>
+    <li>样片 S08–S10，12.5 秒，做到成片质量，实测渲染时间，请你看。</li>
+    <li>灰模粗排。{{NSHOTS}} 个镜头全部用灰纸占位，跑通总时钟，出一条低清的全片预览，请你看节奏。</li>
+    <li>全片：纸片上色、纸偶换嘴、音效、字幕、逐镜头自查，再交付。</li>
+  </ol>
+  <p class="note">交付前的自查标准：画面最暗的部分不能是死黑；没有超过 2.5 秒完全不动的镜头；每个切点在拍上；三个脸的镜头逐帧看；逐秒量响度。</p>
+</section>
+
+</div>

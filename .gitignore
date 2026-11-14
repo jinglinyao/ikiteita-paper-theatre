@@ -1,0 +1,59 @@
+# ---------------------------------------------------------------- Unity
+/unity/[Ll]ibrary/
+/unity/[Tt]emp/
+/unity/[Ll]ogs/
+/unity/[Uu]ser[Ss]ettings/
+/unity/[Oo]bj/
+/unity/[Bb]uild/
+/unity/[Bb]uilds/
+/unity/.vs/
+/unity/.vscode/
+/unity/*.csproj
+/unity/*.sln
+/unity/*.slnx
+/unity/Screenshots/
+# rendered frames (tens of GB) - made again by the scripts
+/unity/Capture/
+# assembled from AgentScripts/src/*.cs by tools/sets.sh at every call
+/unity/AgentScripts/Sets.cs
+
+# ---------------------------------------------------------------- not ours to publish
+# the song (Aimyon, "Ikiteitanda yo na") and anything rendered with it
+/audio/
+/deliver/
+/publish/
+# the lyrics and their translation: supply your own (format: docs/字幕_待填.json)
+/docs/字幕.json
+# working files, downloads, review notes, intermediate renders
+/work/
+
+# animation clips converted from Mixamo (Adobe's terms do not allow redistributing them); not used by the film
+/unity/Assets/MV/Data/Clips/
+/unity/Assets/MV/Data/Clips.meta
+# lip-sync track of another song; not used by the film
+/unity/Assets/MV/Data/lipsync_24_47.json
+/unity/Assets/MV/Data/lipsync_24_47.json.meta
+# the look-development scene and its character; not used by the film
+/unity/Assets/Scenes/Look.unity
+/unity/Assets/Scenes/Look.unity.meta
+/unity/Assets/MV/Characters/jinglin_ps2.vrm
+/unity/Assets/MV/Characters/jinglin_ps2.vrm.meta
+# downloaded models that the final scenes do not use (some are CC BY: not redistributed)
+/unity/Assets/Props/sf_*
+/unity/Assets/Props/sf2_*
+/unity/Assets/Props/modern_ceiling_lamp_01*
+/unity/Assets/Props/schoolchair_01*
+/unity/Assets/Props/wooden_bookshelf_worn*
+
+# ---------------------------------------------------------------- generated material kept small
+/gen/video/_f_*/
+/gen/video/*.jpg
+/gen/image/sheet.jpg
+/gen/ledger.json
+
+# ---------------------------------------------------------------- misc
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+desktop.ini

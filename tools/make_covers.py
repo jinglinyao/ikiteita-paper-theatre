@@ -8,7 +8,7 @@ No blood, no fall, no body on any cover: the covers say what the film is about w
 import os, numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); OUT = os.path.join(ROOT, 'publish', 'covers'); os.makedirs(OUT, exist_ok=True)
-MV = 'E:/sucai/_tools/mvkit/engine/fonts/'; WF = 'C:/Windows/Fonts/'
+FONTS = os.path.join(ROOT, 'fonts') + '/'; MV = FONTS if os.path.exists(FONTS + 'ShipporiMinchoB1-Bold.ttf') else 'E:/sucai/_tools/mvkit/engine/fonts/'; WF = FONTS if os.path.exists(FONTS + 'NotoSerifSC-VF.ttf') else 'C:/Windows/Fonts/'
 BONE, RED, INK = (244, 238, 228), (205, 28, 48), (12, 10, 14)
 
 

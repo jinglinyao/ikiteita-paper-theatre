@@ -13,6 +13,15 @@ design documents. The song, its lyrics and the rendered film are not included.*
 
 ---
 
+## 设计图纸与复刻指南
+
+| 文件 | 内容 |
+|---|---|
+| [`blueprint/显像管的外侧_设计图纸.jpg`](blueprint/显像管的外侧_设计图纸.jpg) | 一张超长图，共 13 节：制作管线、全片时间线、83 个镜头的缩略图墙、实测的舞台平面与剖面、每盏灯在每个舞台状态下的强度、房间与电视、lin 的表演、动物头纸人、纸偶女孩与纸鸟、AI 素材、字幕排版、合成规则。由 `tools/make_blueprint.py` 从工程数据生成。 |
+| [`blueprint/复刻指南_给智能体.md`](blueprint/复刻指南_给智能体.md) | 写给 ChatGPT、Trae 等能操作电脑的智能体：环境清单和安装命令、每一步的验收标准、一条命令出片、分步命令、改哪里、常见问题，最后附一份机器可读的步骤清单。人照着做也一样。 |
+
+[![设计图纸（开头部分，点开看整张）](blueprint/设计图纸_预览.jpg)](blueprint/显像管的外侧_设计图纸.jpg)
+
 ## 这是什么
 
 - 3 分 18 秒，83 个镜头，2560×1440 / 24 fps。
@@ -36,8 +45,9 @@ unity/                 Unity 6000.3.28f1（URP）工程
   AgentScripts/src/    搭景、布光、机位检查、出片入口（按文件名顺序拼成 Sets.cs 后运行）
   Data/                lin 的全曲手 K 数据（key_song.bin）、影片版（key_film.bin）、驱动参数
 tools/                 Python / shell 工具：镜头表、合成、字幕排版、封面、AI 生成调用、检查图
-docs/                  镜头表 film_v5.json、全片时间表、搭景计划、设计图纸、返修记录、字幕模板
+docs/                  镜头表 film_v5.json、全片时间表、搭景计划、早期设计图纸、返修记录、字幕模板、实测舞台坐标 blueprint_geo.json
 gen/                   AI 生成的视频和图片（含提示词）
+blueprint/             定稿的设计图纸（超长图）和给智能体的复刻指南
 ```
 
 ## 环境
@@ -45,8 +55,8 @@ gen/                   AI 生成的视频和图片（含提示词）
 - Unity 6000.3.28f1，URP 17.3。包见 `unity/Packages/manifest.json`（UniVRM 0.131.4、uLipSync 3.1.5 从 GitHub 拉取）。
 - [Unity CLI](https://unity.com/) 与 `com.unity.pipeline` 包：`tools/sets.sh` 用 `unity command script run` 驱动正在运行的编辑器。
 - Python 3.11 以上：numpy、Pillow、pykakasi；ffmpeg。
-- 字体（未随仓库分发）：Shippori Mincho B1、Zen Old Mincho、Zen Kaku Gothic New、Dela Gothic One、Klee One（均为 OFL，可从 Google Fonts 下载）；
-  中文小字和罗马音用的是 Windows 自带的微软雅黑、Segoe UI 和 Noto Serif SC。
+- 字体（未随仓库分发）：Shippori Mincho B1、Zen Old Mincho、Zen Kaku Gothic New、Dela Gothic One、Klee One、Noto Serif SC、Noto Sans SC（均为 OFL），
+  用 `python -P tools/fetch_fonts.py` 从 Google Fonts 仓库下载到 `fonts/`；中文小字和罗马音用 Windows 自带的微软雅黑和 Segoe UI。
 
 ## 你需要自己准备的
 
@@ -54,6 +64,19 @@ gen/                   AI 生成的视频和图片（含提示词）
 |---|---|---|
 | 歌曲音频 | `audio/song.wav` | 193.09 秒。版权属于原作者，本仓库不提供。 |
 | 歌词与译文 | `docs/字幕.json` | 格式见 `docs/字幕_待填.json`：每行 `[起, 止, 日文, 中文, 罗马音]`，时间已填好。也可以把“日文 / 罗马音 / 中文”三行一组的文本交给 `tools/captions_build.py` 生成。 |
+
+## 快速开始
+
+在 Git Bash 里（仓库要放在不含空格的路径下）：
+
+```bash
+python -P tools/setup_paths.py      # 把脚本里作者机器上的路径改成这个克隆的位置
+python -P tools/fetch_fonts.py      # 下载字体
+# 放好 audio/song.wav，可选放 docs/字幕.json；用 Unity 6000.3.28f1 打开 unity/，等编辑器就绪
+bash tools/render_all.sh 成片       # 电视画面 → 舞台镜头 → 房间镜头 → 合成，产物在 deliver/film/成片.mp4
+```
+
+每一步的细节、耗时和验收见 [复刻指南](blueprint/复刻指南_给智能体.md)。
 
 ## 出片流程（简述）
 
@@ -63,9 +86,9 @@ gen/                   AI 生成的视频和图片（含提示词）
 4. **房间镜头**：打开 `Room` 场景，`tools/sets.sh RoomFilm '["1-7,46,52,74,81,82",8,1,2560,1440,"cut","tv"]'`。
 5. **合成**：`python -P tools/finish_film.py cut out.mp4 --crf 16 --captions docs/字幕.json`。负责软切与叠化、片名、片尾、换镜撕裂、大字歌词（`tools/lyric_type.py`）、中文与罗马音，并把响度标准化到 −14 LUFS。
 
-`tools/redo_v3.sh` 是把以上几步串起来的完整脚本。
+`tools/render_all.sh` 把以上几步串成一条命令。`tools/redo_*.sh` 是制作过程中局部重渲用的脚本，依赖作者机器上已有的中间帧，克隆后用不上。
 
-**注意**：很多脚本里写死了作者机器上的路径（`E:/sucai/...`），用之前请改成你自己的。
+**注意**：脚本里原本写死了作者机器上的路径（`E:/sucai/ikiteita`），先运行 `tools/setup_paths.py` 改成你的路径。
 
 ## 关于 AI 生成的内容
 

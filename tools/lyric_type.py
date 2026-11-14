@@ -14,7 +14,9 @@ column, right column, top band, low band), never over the Chinese line and the r
 still leaving. Everything is a function of (line, frame): the same frame always gives the same picture."""
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
-FD = 'E:/sucai/_tools/mvkit/engine/fonts/'
+import os
+_FD = [os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'fonts') + '/', 'E:/sucai/_tools/mvkit/engine/fonts/']      # tools/fetch_fonts.py fills fonts/
+FD = next((d for d in _FD if os.path.exists(d + 'DelaGothicOne-Regular.ttf')), _FD[0])
 FONT = {'drum': 'DelaGothicOne-Regular.ttf', 'pain': 'ShipporiMinchoB1-ExtraBold.ttf', 'prayer': 'ZenOldMincho-Bold.ttf', 'depression': 'ZenKakuGothicNew-Medium.ttf', 'helpless': 'KleeOne-SemiBold.ttf', 'anger': 'ZenOldMincho-Black.ttf'}
 SIZE = {'drum': 0.096, 'pain': 0.090, 'prayer': 0.080, 'depression': 0.072, 'helpless': 0.078, 'anger': 0.135}
 FLOOR = 0.064

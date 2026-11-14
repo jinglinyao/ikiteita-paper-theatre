@@ -57,3 +57,8 @@ __pycache__/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# fonts downloaded by tools/fetch_fonts.py, the path stamp of tools/setup_paths.py, the blueprint build folder
+/fonts/
+/tools/.project_root
+/blueprint/_build/
